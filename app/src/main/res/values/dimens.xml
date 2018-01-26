@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--title_bar高度-->
+    <dimen name="tab_column_height">46dp</dimen>
+</resources>
