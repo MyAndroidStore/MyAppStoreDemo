@@ -1,7 +1,7 @@
 ### 解决 Mac  moitor 打不开
 
-> 1. 下载此JDK版本 jdk-8u144-macosx-x64(并安装)
-		或 jdk-8u151-macosx-x64(亲测比此版本在高的就不可用了)
+> 1. 下载此JDK版本 jdk-8u144-macosx-x64
+		或 jdk-8u151-macosx-x64(亲测比此版本再高的就不可用了)
 
 >  2. 查看mac安装的所有jdk版本(终端输入)
 
