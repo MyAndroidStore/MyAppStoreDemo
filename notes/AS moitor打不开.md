@@ -11,4 +11,4 @@
 ![这里写图片描述](https://github.com/MyAndroidStore/MyAppStoreDemo/blob/master/imgs/4.png?raw=true)
 ![这里写图片描述](https://github.com/MyAndroidStore/MyAppStoreDemo/blob/master/imgs/5.png?raw=true)
 
-> 3. moitor可以打开了
+> 3. 重启AS,moitor可以打开了
