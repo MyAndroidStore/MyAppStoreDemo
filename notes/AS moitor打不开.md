@@ -4,9 +4,9 @@
 
 >  2. 查看mac安装的所有jdk版本(终端输入)
 
-	```
+```
 	/usr/libexec/java_home -V
-	```
+```
 	
 ![这里写图片描述](https://github.com/MyAndroidStore/MyAppStoreDemo/blob/master/imgs/4.png?raw=true)
 ![这里写图片描述](https://github.com/MyAndroidStore/MyAppStoreDemo/blob/master/imgs/5.png?raw=true)
