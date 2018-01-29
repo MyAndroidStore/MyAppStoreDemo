@@ -24,7 +24,64 @@
          * @see #TYPE_INPUT_METHOD_DIALOG
          */
 
+### Activity.setContentView()
+	
+```
+// activity
+public void setContentView(int layoutResID) {
+		// Window(抽象类)-->最终调用的是new PhoneWindow().setContentView();
+        getWindow().setContentView(layoutResID);
+        initWindowDecorActionBar();
+}
+```
+
+### PhoneWindow.setContentView()
+
+```
+@Override
+public void setContentView(int layoutResID){
+
+	// 其实只做了两件事
+	installDecor(); // 初始化DectorView(继承FrameLayout),向DectorView中添加系统布局，获取其中的帧布局
+	mLayoutInflator.inflate(layoutResID,mContentParent);// 将我们activity中的布局添加到帧布局中
+}
+
+```
 
 
-	Activity类
-		setContentView() 实际上是调用 Window(抽象类).setContentView()-->最终调用的是 （mWindow = new PhoneWindow(this, window, activityConfigCallback);） PhoneWindow.setContentView();
+```
+private void installDector(){
+
+	if (mDecor == null) {
+		mDecor = generateDecor(); // new DecorView();
+		....
+	}
+	
+	if(mContentParent == null){
+		mContentParent = generateLayout(mDecor);//其实返回的是一个(R.id.content)帧布局
+		....
+	}
+}
+```	
+```	
+R.layout.screen_simple;资源
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+    <ViewStub android:id="@+id/action_mode_bar_stub"
+              android:inflatedId="@+id/action_mode_bar"
+              android:layout="@layout/action_mode_bar"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:theme="?attr/actionBarTheme" />
+    <FrameLayout
+         android:id="@android:id/content"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:foregroundInsidePadding="false"
+         android:foregroundGravity="fill_horizontal|top"
+         android:foreground="?android:attr/windowContentOverlay" />
+</LinearLayout>
+```	
