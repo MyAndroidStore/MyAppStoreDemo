@@ -29,7 +29,7 @@
 ```
 // activity
 public void setContentView(int layoutResID) {
-		// Window(抽象类)-->最终调用的是new PhoneWindow().setContentView();
+        // Window(抽象类)-->最终调用的是new PhoneWindow().setContentView();
         getWindow().setContentView(layoutResID);
         initWindowDecorActionBar();
 }
