@@ -85,3 +85,5 @@ R.layout.screen_simple;资源
          android:foreground="?android:attr/windowContentOverlay" />
 </LinearLayout>
 ```	
+
+![这里写图片描述](https://github.com/MyAndroidStore/MyAppStoreDemo/blob/master/imgs/9.png?raw=true)
