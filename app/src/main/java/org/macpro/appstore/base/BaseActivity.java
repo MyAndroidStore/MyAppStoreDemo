@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 
 import org.macpro.appstore.R;
 import org.macpro.appstore.utils.AppActivityManager;
+import org.macpro.statusbarlibrary.StatusBarUtil;
 
 import java.lang.reflect.Field;
 
@@ -45,15 +46,9 @@ public abstract class BaseActivity extends Activity {
         // 填充布局
         setContentView(setContentView());
 
-        // 当系统版本为4.4或者4.4以上时可以使用沉浸式状态栏
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            // 透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            // 透明导航栏
-            // getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        // 设置沉浸式状态栏
+        StatusBarUtil.setSatusBarColorActivity(this,statusBarColor());
 
-            setStatusBar();
-        }
         // 初始化view
         initView();
     }
@@ -68,6 +63,12 @@ public abstract class BaseActivity extends Activity {
      * 初始化view
      */
     protected abstract void initView();
+
+
+    /**
+     * 状态栏颜色
+     */
+    protected abstract int statusBarColor();
 
 
     @Override
@@ -157,55 +158,6 @@ public abstract class BaseActivity extends Activity {
     }
 
 
-    /**
-     * 获取状态栏的高度(反射)
-     */
-    protected int getStatusBarHeight() {
-        try {
-            // 通过反射获取到类
-            Class<?> c = Class.forName("com.android.internal.R$dimen");
-            // 创建对象
-            Object obj = c.newInstance();
-            // 拿取到属性
-            Field field = c.getField("status_bar_height");
-            // 获取值
-            int x = Integer.parseInt(field.get(obj).toString());
-            return getResources().getDimensionPixelSize(x);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
 
 
-    /**
-     * 设置沉浸式状态栏(需要4.4以上版本)
-     */
-    protected void setStatusBar() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-
-            // 获得状态栏高度
-            final int statusHeight = getStatusBarHeight();
-
-            try {
-                // 获得 title_bar控件
-                title_bar = (RelativeLayout) findViewById(R.id.bar_layout);
-
-                title_bar.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        int titleHeight = title_bar.getHeight();
-                        ViewGroup.LayoutParams params = title_bar.getLayoutParams();
-                        params.height = statusHeight + titleHeight;
-                        title_bar.setLayoutParams(params);
-                    }
-                });
-
-            }catch (Exception e){
-
-                e.printStackTrace();
-            }
-        }
-    }
 }
