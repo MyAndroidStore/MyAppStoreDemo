@@ -18,11 +18,16 @@ public class StatusBarUtil {
     /**
      * 设置沉浸式状态栏(需要4.4以上版本)
      *      Activity中调用此方法
-     *      color == 0 不添加占位布局
+     *      color == 0 不添加占位布局，但是 状态栏透明
+     *      color == -1 不添加占位布局 状态栏默认
      */
     public static void setSatusBarColorActivity(final Activity activity, final int color) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+
+            if (color == -1)
+                return;
 
             // 透明导航栏
             // activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
@@ -62,11 +67,16 @@ public class StatusBarUtil {
     /**
      * 设置沉浸式状态栏(需要4.4以上版本)
      *      Fragment中调用此方法
-     *      color == 0 不添加占位布局
+     *      color == 0 不添加占位布局，但是 状态栏透明
+     *      color == -1 不添加占位布局 状态栏默认
      */
     public static void setSatusBarColorFragment(final Activity activity, View parent, final int color) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+
+            if (color == -1)
+                return;
 
             //透明状态栏
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
