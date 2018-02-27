@@ -63,7 +63,7 @@ public class StatusBarUtil {
      * 设置沉浸式状态栏(需要4.4以上版本)
      * color == 0 默认白色
      */
-    public static void setSatusBarColorFragment(final Activity activity, final int color) {
+    public static void setSatusBarColorFragment(final Activity activity,ViewGroup root, final int color) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
@@ -74,7 +74,7 @@ public class StatusBarUtil {
 
             try {
 
-                final View satusBar = activity.findViewById(R.id.status_bar);
+                final View satusBar = root.findViewById(R.id.status_bar);
 
                 satusBar.post(new Runnable() {
                     @Override
