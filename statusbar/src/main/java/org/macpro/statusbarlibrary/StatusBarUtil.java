@@ -1,7 +1,9 @@
 package org.macpro.statusbarlibrary;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -17,37 +19,28 @@ public class StatusBarUtil {
 
     /**
      * 设置沉浸式状态栏(需要4.4以上版本)
-     *      Activity中调用此方法
-     *      color == 0 不添加占位布局，但是 状态栏透明
-     *      color == -1 不添加占位布局 状态栏默认
+     * Activity中调用此方法
+     * color == 0 不添加占位布局，默认白色
      */
     public static void setSatusBarColorActivity(final Activity activity, final int color) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
-
-            if (color == -1)
-                return;
-
-            // 透明导航栏
-            // activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-
             //透明状态栏
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
 
             try {
 
                 final View satusBar = activity.findViewById(R.id.status_bar);
 
-                if (color == 0)
-                    return;
-
                 satusBar.post(new Runnable() {
                     @Override
                     public void run() {
 
-                        satusBar.setBackgroundColor(activity.getResources().getColor(color));
+                        if (color != 0)
+                            satusBar.setBackgroundColor(activity.getResources().getColor(color));
+                        else
+                            satusBar.setBackgroundColor(Color.WHITE);
 
                         ViewGroup.LayoutParams layoutParams = satusBar.getLayoutParams();
                         layoutParams.height = getStatusBarHeight(activity);
@@ -57,8 +50,10 @@ public class StatusBarUtil {
                 });
 
             } catch (Exception e) {
-
-                e.printStackTrace();
+                Log.e(activity.getLocalClassName(),"沉浸式状态栏：空指针异常");
+                Log.e(activity.getLocalClassName(),"沉浸式状态栏：设置沉浸式状态栏失败：");
+                Log.e(activity.getLocalClassName(),"沉浸式状态栏：请检查是否在布局中引用 statusbar.xml");
+                Log.e(activity.getLocalClassName(),"沉浸式状态栏：<include layout=\"@layout/statusbar\"/>");
             }
         }
     }
@@ -66,9 +61,9 @@ public class StatusBarUtil {
 
     /**
      * 设置沉浸式状态栏(需要4.4以上版本)
-     *      Fragment中调用此方法
-     *      color == 0 不添加占位布局，但是 状态栏透明
-     *      color == -1 不添加占位布局 状态栏默认
+     * Fragment中调用此方法
+     * color == 0 不添加占位布局，但是 状态栏透明
+     * color == -1 不添加占位布局 状态栏默认
      */
     public static void setSatusBarColorFragment(final Activity activity, View parent, final int color) {
 
@@ -78,7 +73,7 @@ public class StatusBarUtil {
             if (color == -1)
                 return;
 
-            //透明状态栏
+            // 透明状态栏
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             // 透明导航栏
             // activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
