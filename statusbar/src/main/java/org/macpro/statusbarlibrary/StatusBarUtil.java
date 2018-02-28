@@ -93,10 +93,10 @@ public class StatusBarUtil {
                 });
 
             } catch (Exception e) {
-                Log.e(activity.getLocalClassName(), "沉浸式状态栏：空指针异常");
-                Log.e(activity.getLocalClassName(), "沉浸式状态栏：设置沉浸式状态栏失败：");
-                Log.e(activity.getLocalClassName(), "沉浸式状态栏：请检查是否在布局中引用 statusbar.xml");
-                Log.e(activity.getLocalClassName(), "沉浸式状态栏：<include layout=\"@layout/statusbar\"/>");
+                Log.e("与"+activity.getLocalClassName()+"关联的fragment", "沉浸式状态栏：空指针异常");
+                Log.e("与"+activity.getLocalClassName()+"关联的fragment", "沉浸式状态栏：设置沉浸式状态栏失败：");
+                Log.e("与"+activity.getLocalClassName()+"关联的fragment", "沉浸式状态栏：请检查是否在布局中引用 statusbar_fragment.xml");
+                Log.e("与"+activity.getLocalClassName()+"关联的fragment", "沉浸式状态栏：<include layout=\"@layout/statusbar_fragment\"/>");
             }
 
         }
